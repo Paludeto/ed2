@@ -2,10 +2,8 @@ import time
 
 def bubble_sort(vetor):
 
-    n = len(vetor) - 1
-
-    for i in range(0, n):
-        for j in range(0, n - i):
+    for i in range(0, len(vetor)):
+        for j in range(0, len(vetor) - 1 - i):
             if vetor[j] > vetor[j + 1]:
                 vetor[j], vetor[j + 1] = vetor[j + 1], vetor[j]
 
@@ -29,6 +27,7 @@ print(vetor)
 print(fim - inicio, "segundos")
 
 # Tempo Selection Sort
+print("Selection sort")
 vetor = [8, 4, 3, 2, 19, 0]
 inicio = time.time()
 selection_sort(vetor)
