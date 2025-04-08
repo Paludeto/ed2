@@ -19,7 +19,7 @@ def selection_sort(vetor):
 
 # Tempo Bubblesort
 print("Bubblesort")
-vetor = list(range(10**1, 0, -1))
+vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
 inicio = time.time()
 bubble_sort(vetor)
 fim = time.time()
@@ -28,7 +28,7 @@ print(fim - inicio, "segundos")
 
 # Tempo Selection Sort
 print("Selection sort")
-vetor = [8, 4, 3, 2, 19, 0]
+vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
 inicio = time.time()
 selection_sort(vetor)
 fim = time.time()
