@@ -9,7 +9,7 @@ def bubble_sort(vetor):
 
 def selection_sort(vetor, option):
     
-    if option is 1:
+    if option == 1:
         for i in range(0, len(vetor) - 1):
             menor = i
             for j in range(i + 1, len(vetor)):
@@ -17,7 +17,7 @@ def selection_sort(vetor, option):
                     menor = j
             if i != menor:
                 vetor[i], vetor[menor] = vetor[menor], vetor[i]
-    elif option is 2:
+    elif option == 2:
         for i in range(0, len(vetor) - 1):
             maior = i
             for j in range(i + 1, len(vetor)):
@@ -41,7 +41,7 @@ print(fim - inicio, "segundos")
 print("Selection sort")
 vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
 inicio = time.time()
-selection_sort(vetor, 2)
+selection_sort(vetor, 1)
 fim = time.time()
 print(vetor)
 print(fim - inicio, "segundos")
