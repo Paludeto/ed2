@@ -10,7 +10,7 @@ def bubble_sort(vetor):
 def selection_sort(vetor, option):
     
     if option is 1:
-        for i in range(0, len(vetor)):
+        for i in range(0, len(vetor) - 1):
             menor = i
             for j in range(i + 1, len(vetor)):
                 if vetor[j] < vetor[menor]:
@@ -18,7 +18,7 @@ def selection_sort(vetor, option):
             if i != menor:
                 vetor[i], vetor[menor] = vetor[menor], vetor[i]
     elif option is 2:
-        for i in range(0, len(vetor)):
+        for i in range(0, len(vetor) - 1):
             maior = i
             for j in range(i + 1, len(vetor)):
                 if vetor[j] > vetor[maior]:
