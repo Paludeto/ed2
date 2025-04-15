@@ -27,7 +27,20 @@ def selection_sort(vetor, option):
                 vetor[i], vetor[maior] = vetor[maior], vetor[i]
     else:
         print("Opção inválida")
-    
+
+def insertion_sort(vetor):
+
+    for i in range(1, len(vetor)):
+        
+        k = i - 1   # Antecede i
+        aux = vetor[i]
+        
+        # Move elementos maiores para a direita enquanto o elemento da direita é menor do que o da esquerda
+        while k >= 0 and aux < vetor[k]:
+            vetor[k + 1] = vetor[k]
+            k = k - 1
+        vetor[k + 1] = aux
+
 # Tempo Bubblesort
 print("Bubblesort")
 vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
@@ -42,6 +55,15 @@ print("Selection sort")
 vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
 inicio = time.time()
 selection_sort(vetor, 1)
+fim = time.time()
+print(vetor)
+print(fim - inicio, "segundos")
+
+# Insertion sort
+print("Insertion sort")
+vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
+inicio = time.time()
+insertion_sort(vetor)
 fim = time.time()
 print(vetor)
 print(fim - inicio, "segundos")
