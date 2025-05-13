@@ -104,11 +104,14 @@ def charizard_sort(arr):
     
     data = response.json()
 
-    if data["name"] != "charizard":
-        print(f'{data["name"].capitalize()}, sem sort para você! ❌')
+    name = data["name"].capitalize()
+    move = random.choice(data["moves"])["move"]["name"].replace("-", " ").title()
+
+    if name != "Charizard":
+        print(f"| {name:<14} | {move:<38} | Não foi muito efetivo... sem sort para você! ❌ |")
         charizard_sort(arr)
     else:
-        print("🐉 Achou o Charizard! Vou fazer o sort do seu array! ✅")
+        print(f"| {name:<14} | {move:<38} | Foi super efetivo! ✅|")
         arr.sort()
         return
 
