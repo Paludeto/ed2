@@ -1,69 +1,107 @@
 import time
 
-def bubble_sort(vetor):
+# ═══════════════════════════════════════════🫧 BUBBLE SORT 🫧══════════════════════════════════════════════════
 
-    for i in range(0, len(vetor)):
-        for j in range(0, len(vetor) - 1 - i):
-            if vetor[j] > vetor[j + 1]:
-                vetor[j], vetor[j + 1] = vetor[j + 1], vetor[j]
+def bubble_sort(arr):
 
-def selection_sort(vetor, option):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - 1 - i):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+# ═══════════════════════════════════════════🔎 SELECTION SORT 🔎═══════════════════════════════════════════════
+
+def selection_sort(arr):
+
+    n = len(arr)
+
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+# ═══════════════════════════════════════════📌 INSERTION SORT 📌═══════════════════════════════════════════════
+
+def insertion_sort(arr):
+
+    for i in range(1, len(arr)):
+        chave = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > chave:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = chave
+
+# ═══════════════════════════════════════════🔥 HEAP SORT 🔥══════════════════════════════════════════════════
+
+def heapify(arr, n, i):
+
+    maior = i
+    esq = 2 * i + 1
+    dir = 2 * i + 2
+
+    if esq < n and arr[esq] > arr[maior]:
+        maior = esq
+    if dir < n and arr[dir] > arr[maior]:
+        maior = dir
+    if maior != i:
+        arr[i], arr[maior] = arr[maior], arr[i]
+        heapify(arr, n, maior)
+
+def heap_sort(arr):
+
+    n = len(arr)
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+    for i in range(n - 1, 0, -1):
+        arr[0], arr[i] = arr[i], arr[0]
+        heapify(arr, i, 0)
+
+# ═══════════════════════════════════════════⚡ QUICK SORT ⚡══════════════════════════════════════════════════
+
+def quicksort(arr, inicio=0, fim=None):
+
+    if fim is None:
+        fim = len(arr) - 1
+    if inicio < fim:
+        p = particiona(arr, inicio, fim)
+        quicksort(arr, inicio, p - 1)
+        quicksort(arr, p + 1, fim)
+
+def particiona(arr, inicio, fim):
+
+    pivo = arr[fim]
+    i = inicio - 1
+    for j in range(inicio, fim):
+        if arr[j] <= pivo:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i + 1], arr[fim] = arr[fim], arr[i + 1]
+    return i + 1
+
+# ═══════════════════════════════════════════🧪 TESTES DE TEMPO 🧪═══════════════════════════════════════════════
+
+def testar(sort_func, nome):
     
-    if option == 1:
-        for i in range(0, len(vetor) - 1):
-            menor = i
-            for j in range(i + 1, len(vetor)):
-                if vetor[j] < vetor[menor]:
-                    menor = j
-            if i != menor:
-                vetor[i], vetor[menor] = vetor[menor], vetor[i]
-    elif option == 2:
-        for i in range(0, len(vetor) - 1):
-            maior = i
-            for j in range(i + 1, len(vetor)):
-                if vetor[j] > vetor[maior]:
-                    maior = j
-            if i != maior:
-                vetor[i], vetor[maior] = vetor[maior], vetor[i]
+    vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
+    vetor_copia = vetor.copy()
+
+    inicio = time.perf_counter()
+    if nome == "Quick Sort":
+        sort_func(vetor_copia, 0, len(vetor_copia) - 1)
     else:
-        print("Opção inválida")
+        sort_func(vetor_copia)
+    fim = time.perf_counter()
 
-def insertion_sort(vetor):
+    duracao_ms = fim - inicio
+    print(f"{nome:<15}: {vetor_copia}")
+    print(f"Tempo: {duracao_ms:.3e} ms\n")
 
-    for i in range(1, len(vetor)):
-        
-        k = i - 1   # Antecede i
-        aux = vetor[i]
-        
-        # Move elementos maiores para a direita enquanto o elemento da direita é menor do que o da esquerda
-        while k >= 0 and aux < vetor[k]:
-            vetor[k + 1] = vetor[k]
-            k = k - 1
-        vetor[k + 1] = aux
-
-# Tempo Bubblesort
-print("Bubblesort")
-vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
-inicio = time.time()
-bubble_sort(vetor)
-fim = time.time()
-print(vetor)
-print(fim - inicio, "segundos")
-
-# Tempo Selection Sort
-print("Selection sort")
-vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
-inicio = time.time()
-selection_sort(vetor, 1)
-fim = time.time()
-print(vetor)
-print(fim - inicio, "segundos")
-
-# Insertion sort
-print("Insertion sort")
-vetor = [-93, 97, -92, 69, -7, 6, 94, 53, 35, -34, 0, -14, -26, 32, 87]
-inicio = time.time()
-insertion_sort(vetor)
-fim = time.time()
-print(vetor)
-print(fim - inicio, "segundos")
+testar(bubble_sort, "Bubble Sort")
+testar(selection_sort, "Selection Sort")
+testar(insertion_sort, "Insertion Sort")
+testar(heap_sort, "Heap Sort")
+testar(quicksort, "Quick Sort")
