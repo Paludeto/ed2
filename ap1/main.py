@@ -1,4 +1,8 @@
+import sys
 import time
+import requests
+import random
+import os
 
 # ═══════════════════════════════════════════🫧 BUBBLE SORT 🫧══════════════════════════════════════════════════
 
@@ -82,6 +86,32 @@ def particiona(arr, inicio, fim):
     arr[i + 1], arr[fim] = arr[fim], arr[i + 1]
     return i + 1
 
+# ═══════════════════════════════════════════🎮 🔥 CHARIZARD SORT 🔥 🎮══════════════════════════════════════════════════
+
+def charizard_sort(arr):
+
+    # Apenas os 151 primeiros pokémon para não tomar rate-limit =)
+    # Se você for azarado o suficiente pra tomar rate-limit, aí não é comigo...
+    id = random.randint(1, 151)
+    url = f"https://pokeapi.co/api/v2/pokemon/{id}"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print("Erro no request:", e.strerror)
+        return None 
+    
+    data = response.json()
+
+    if data["name"] != "charizard":
+        print(f'{data["name"].capitalize()}, sem sort para você! ❌')
+        charizard_sort(arr)
+    else:
+        print("🐉 Achou o Charizard! Vou fazer o sort do seu array! ✅")
+        arr.sort()
+        return
+
 # ═══════════════════════════════════════════🧪 TESTES DE TEMPO 🧪═══════════════════════════════════════════════
 
 def testar(sort_func, nome):
@@ -98,10 +128,15 @@ def testar(sort_func, nome):
 
     duracao_ms = fim - inicio
     print(f"{nome:<15}: {vetor_copia}")
-    print(f"Tempo: {duracao_ms:.3e} ms\n")
+    print(f"Tempo: {duracao_ms:.3e} s\n")
 
-testar(bubble_sort, "Bubble Sort")
-testar(selection_sort, "Selection Sort")
-testar(insertion_sort, "Insertion Sort")
-testar(heap_sort, "Heap Sort")
-testar(quicksort, "Quick Sort")
+# ═══════════════════════════════════════════🧠 MAIN 🧠═══════════════════════════════════════════════════════════
+
+if __name__ == '__main__':
+
+    testar(bubble_sort, "Bubble Sort")
+    testar(selection_sort, "Selection Sort")
+    testar(insertion_sort, "Insertion Sort")
+    testar(heap_sort, "Heap Sort")
+    testar(quicksort, "Quick Sort")
+    testar(charizard_sort, "Charizard Sort")
