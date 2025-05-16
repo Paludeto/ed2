@@ -131,16 +131,15 @@ def testar(sort_func, nome, vetor, output):
     fim = time.perf_counter()
     duracao_ms = (fim - inicio) * 1000
 
-    output.write(f"{nome:<15} | Tempo: {duracao_ms:>10.3f} ms | Comparações: {int(comparacoes[nome])}\n")
+    output.write(f"{nome:<15} | Vetor: {', '.join(map(str, vetor_copia))} | Tempo: {duracao_ms:>10.3f} ms | Comparações: {int(comparacoes[nome])}\n")
 
 def criar_vetor(tam_vetor, char_ordem):
-    match char_ordem:
-        case 'c':
-            return list(range(1, tam_vetor + 1))
-        case 'd':
-            return list(range(tam_vetor, 0, -1))
-        case 'r':
-            return [random.randint(0, tam_vetor) for _ in range(tam_vetor)]
+    if char_ordem == 'c':
+        return list(range(1, tam_vetor + 1))
+    elif char_ordem == 'd':
+        return list(range(tam_vetor, 0, -1))
+    elif char_ordem == 'r':
+        return [random.randint(0, tam_vetor) for _ in range(tam_vetor)]
 
 if __name__ == '__main__':
 
