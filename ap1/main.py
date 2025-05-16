@@ -152,6 +152,10 @@ if __name__ == '__main__':
     tam_vetor = 0
     char_ordem = ''
 
+    if not input.endswith(".txt") or not output.endswith(".txt"):
+        print("Argumentos devem ser do formato .txt")
+        sys.exit(1)
+
     try:
         with open(input, 'r', encoding='utf-8') as f:
             linhas = [linha.strip() for linha in f.readlines()]
