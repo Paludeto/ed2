@@ -1,0 +1,6 @@
+Bubble Sort     | Tempo:      0.439 ms | Comparações: 4950
+Selection Sort  | Tempo:      0.301 ms | Comparações: 4950
+Insertion Sort  | Tempo:      0.209 ms | Comparações: 2749
+Heap Sort       | Tempo:      0.116 ms | Comparações: 1025
+Quick Sort      | Tempo:      0.080 ms | Comparações: 638
+Charizard Sort  | Tempo:    618.348 ms | Comparações: 669
