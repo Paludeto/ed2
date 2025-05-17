@@ -12,6 +12,7 @@ comparacoes = {
     "Selection Sort": 0,
     "Insertion Sort": 0,
     "Heap Sort": 0,
+    "Merge Sort": 0,
     "Quick Sort": 0,
     "Charizard Sort": 0
 }
@@ -83,6 +84,35 @@ def heap_sort(arr):
     for i in range(n - 1, 0, -1):
         arr[0], arr[i] = arr[i], arr[0]
         heapify(arr, i, 0)
+
+# Merge Sort
+def merge_sort(arr):
+    # função auxiliar que faz o merge e conta comparações
+    def _merge(a, b):
+        merged = []
+        i = j = 0
+        while i < len(a) and j < len(b):
+            comparacoes["Merge Sort"] += 1
+            if a[i] <= b[j]:
+                merged.append(a[i])
+                i += 1
+            else:
+                merged.append(b[j])
+                j += 1
+        merged.extend(a[i:])
+        merged.extend(b[j:])
+        return merged
+
+    # recursão
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    result = _merge(left, right)
+    # copia de volta para arr
+    arr[:] = result
+    return arr
 
 # Quicksort iterativo
 def particiona(arr, inicio, fim):
@@ -185,9 +215,10 @@ if __name__ == '__main__':
 
     vetor = criar_vetor(tam_vetor, char_ordem)
     with open(output_file, 'w', encoding='utf-8') as f:
-        testar(bubble_sort, "Bubble Sort", vetor, f)
-        testar(selection_sort, "Selection Sort", vetor, f)
-        testar(insertion_sort, "Insertion Sort", vetor, f)
-        testar(heap_sort, "Heap Sort", vetor, f)
-        testar(quicksort_iterativo, "Quick Sort", vetor, f)
-        testar(charizard_sort, "Charizard Sort", vetor, f)
+        testar(insertion_sort,    "Insertion Sort", vetor, f)
+        testar(selection_sort,    "Selection Sort", vetor, f)
+        testar(bubble_sort,       "Bubble Sort",    vetor, f)
+        testar(merge_sort,        "Merge Sort",     vetor, f)
+        testar(quicksort_iterativo, "Quick Sort",   vetor, f)
+        testar(heap_sort,         "Heap Sort",      vetor, f)
+        testar(charizard_sort,    "Charizard Sort", vetor, f)
