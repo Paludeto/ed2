@@ -158,7 +158,7 @@ def criar_vetor(tam_vetor, char_ordem):
     elif char_ordem == 'd':
         return list(range(tam_vetor, 0, -1))
     elif char_ordem == 'r':
-        return [random.randint(0, tam_vetor) for _ in range(tam_vetor)]
+        return [random.randint(0, 32000) for _ in range(tam_vetor)]
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
