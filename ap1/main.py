@@ -157,12 +157,13 @@ def charizard_sort(arr):
         move = random.choice(data["moves"])["move"]["name"].replace("-", " ").title()
         if name != "Charizard":
             print(f"{name} usou {move}, mas não foi muito efetivo...\n")
+            comparacoes["Charizard Sort"] += 1
             continue
         # quando for Charizard, ordena com sort() e conta as comparações aproximadas
-        # o método built-in se chama Timsort
+        # o método built-in se chama Timsort, somamos o número de comparações com seu caso médio
         print(f"{name} usou {move}! Foi super efetivo!\n")
         arr.sort()
-        comparacoes["Charizard Sort"] = int(len(arr) * math.log2(len(arr)))
+        comparacoes["Charizard Sort"] += int(len(arr) * math.log2(len(arr)))
         break
 
 # Função para testar os sorts
