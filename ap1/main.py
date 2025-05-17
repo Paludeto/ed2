@@ -145,7 +145,7 @@ def charizard_sort(arr):
     # tenta buscar um Pokémon até ser Charizard
     while True:
         poke_id = random.randint(1, 251)  # gera ID aleatório
-        url = f"https://pokeapi.co/api/v2/pokemon/{poke_id}"
+        url = f"https://pokeapi.co/api/v2/pokemon/{poke_id}" # envia requisição à API PokéAPI e trata seus dados
         try:
             response = requests.get(url)
             response.raise_for_status()
