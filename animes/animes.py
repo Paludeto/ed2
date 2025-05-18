@@ -38,10 +38,11 @@ def escrita_qtde_bytes(lista):
 
 # Apenas escreve o tamanho de cada entrada
 def escrita_arq_indice(lista):
-
+    i = 0
     with open('output_arq_indice.txt', 'w', encoding='utf-8') as f:
         for linha in lista:
-            f.write(str(len(linha)) + ' ')
+            f.write(str(i) + ' ')
+            i += len(linha)
 
 # Dá append em um delimitador no final da entrada
 def escrita_delim(lista):
