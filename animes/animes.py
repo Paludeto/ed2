@@ -12,9 +12,7 @@ def lista_formatada(arquivo):
     return lista
 
 # Escrita para registros fixos, campos de tamanho variável
-def escrita_reg_fixo(arquivo):
-
-    lista = lista_formatada(arquivo)
+def escrita_reg_fixo(arquivo, lista):
 
     # Pega item com o maior tamanho
     maior_tam = max(len(linha) for linha in lista)
@@ -25,36 +23,28 @@ def escrita_reg_fixo(arquivo):
             f.write(linha + (padding * '*') + '\n')
 
 # Simplesmente remove o '\n'
-def escrita_campo_fixo(arquivo):
-
-    lista = lista_formatada(arquivo)
+def escrita_campo_fixo(arquivo, lista):
 
     with open('output_campo_fixo.txt', 'w', encoding='utf-8') as f:
         for linha in lista:
             f.write(linha + '|')
 
 # Prepend no número de bytes
-def escrita_qtde_bytes(arquivo):
-
-    lista = lista_formatada(arquivo)
+def escrita_qtde_bytes(arquivo, lista):
 
     with open('output_qtde_bytes.txt', 'w', encoding='utf-8') as f:
         for linha in lista:
             f.write(str(len(linha)) + linha + '|')
 
 # Apenas escreve o tamanho de cada entrada
-def escrita_arq_indice(arquivo):
-
-    lista = lista_formatada(arquivo)
+def escrita_arq_indice(arquivo, lista):
 
     with open('output_arq_indice.txt', 'w', encoding='utf-8') as f:
         for linha in lista:
             f.write(str(len(linha)) + ' ')
 
 # Dá append em um delimitador no final da entrada
-def escrita_delim(arquivo):
-
-    lista = lista_formatada(arquivo)
+def escrita_delim(arquivo, lista):
 
     with open('output_delim.txt', 'w', encoding='utf-8') as f:
         for linha in lista:
@@ -62,11 +52,13 @@ def escrita_delim(arquivo):
     
 def gerar_outputs(arquivo):
 
-    escrita_reg_fixo(arquivo)
-    escrita_campo_fixo(arquivo)
-    escrita_qtde_bytes(arquivo)
-    escrita_arq_indice(arquivo)
-    escrita_delim(arquivo) 
+    lista = lista_formatada(arquivo)
+
+    escrita_reg_fixo(arquivo, lista)
+    escrita_campo_fixo(arquivo, lista)
+    escrita_qtde_bytes(arquivo, lista)
+    escrita_arq_indice(arquivo, lista)
+    escrita_delim(arquivo, lista) 
 
 def main():
 
