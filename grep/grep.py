@@ -41,8 +41,6 @@ def read_record_by_rrn(arquivo, rrn):
                 
 if __name__ == '__main__':
 
-    
-
     input = sys.argv[1]
 
     if sys.argv[2].isdigit():
