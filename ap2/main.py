@@ -194,7 +194,6 @@ def main():
     if not input_file.endswith(".txt") or not output_file.endswith(".txt"):
         print("Argumentos devem ser do formato .txt")
         sys.exit(1)
-
     
     # Exception handling em caso de absurdidades
     try:
@@ -206,7 +205,6 @@ def main():
     except ValueError:
         print("Erro: arquivo mal formatado ou com dados inválidos.")
         sys.exit(1)
-
 
     escreve_arquivo(lista_herois, output_file)
 
