@@ -80,7 +80,7 @@ def quick_sort(arr, reverso=False):
 def heap_sort(arr, reverso=False):
 
     copia = [(h.get_key(), h) for h in arr]
-    if reverso:
+    if not reverso:
         copia = [(-int(k), h) for k, h in copia]  # cast para int pra poder inverter com -
     else:
         copia = [(int(k), h) for k, h in copia]
@@ -119,7 +119,7 @@ def insertion_sort(arr, reverso=False):
     for i in range(1, len(resultado)):
         chave = resultado[i]
         j = i - 1
-        while j >= 0 and comparar(chave.get_key(), resultado[j].get_key(), reverso):
+        while j >= 0 and comparar(chave.get_key(), resultado[j].get_key(), not reverso):
             resultado[j + 1] = resultado[j]
             j -= 1
         resultado[j + 1] = chave
@@ -131,6 +131,9 @@ def parse_arquivo(arquivo):
 
     with open(arquivo, 'r', encoding='utf-8') as f:
         temp_lista = f.readlines()
+
+    if len(temp_lista) < 2:
+        raise ValueError("Arquivo inválido: faltam dados ou cabeçalho.")
 
     # Primeiro pop pra extrair metadados
     header = temp_lista.pop(0).strip().split(',')
@@ -197,9 +200,13 @@ def main():
     try:
         lista_herois, metodo_sort, ordem_sort = parse_arquivo(input_file) 
         lista_herois = keysort_herois(lista_herois, metodo_sort, ordem_sort)
+    except FileNotFoundError:
+        print(f"Erro: Arquivo '{input_file}' não encontrado.")
+        sys.exit(1)
     except ValueError:
-        print("Alguma coisa de errada não está certa nos seus metadados. Faça o L imediatamente.")
-        exit()
+        print("Erro: arquivo mal formatado ou com dados inválidos.")
+        sys.exit(1)
+
 
     escreve_arquivo(lista_herois, output_file)
 
